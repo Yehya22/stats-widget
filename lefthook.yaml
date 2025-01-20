@@ -1,0 +1,17 @@
+pre-commit:
+  commands:
+    eslint:
+      glob: "*.{js,svelte}"
+      run: pnpm exec eslint --fix {staged_files} && git add {staged_files}
+    prettier:
+      glob: '*.{js,ts,svelte,html,css}'
+      run: 'pnpm exec prettier --write {staged_files} && git add {staged_files}'
+    brace-backtick-check:
+      glob: '*.svelte'
+      run: 'rg -q -F "{\`" {staged_files} && echo "Error: Found \"{\`\" in staged files" && exit 1 || exit 0'
+post-merge:
+  commands:
+    install-deps:
+      files: git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD
+      glob: "package.json"
+      run: pnpm install

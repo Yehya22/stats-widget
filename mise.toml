@@ -1,0 +1,51 @@
+[tools]
+node = "22"
+java = "openjdk-17"
+
+# run
+[tasks.dev]
+alias = 'default'
+run = 'pnpm dev'
+
+[tasks.'run:pre_run']
+run = '''
+pnpm exec cap copy
+mkdir -p dist-native
+touch dist-native/index.html
+'''
+
+[tasks.'run:dev']
+depends = ['run:pre_run']
+run = 'pnpm exec cap run --no-sync -l --host $(ipconfig getifaddr en0) --port $VITE_PORT'
+description = 'Run the app with live reload on a simulator or (android) device. Optional arg: android|ios'
+
+[tasks.'run:prod']
+depends = ['build:prod']
+run = 'pnpm exec cap run --no-sync'
+description = 'Builds the app then runs it on a simulator or (android) device. Optional arg: android|ios'
+
+# build
+[tasks.print_version]
+run = '''
+VERSION=$(jq -r .version package.json)
+echo "\033[1m\033[32m➜\033[0m\033[1m uploading ${APP_NAME}@${VERSION}\033[0m\n"
+'''
+
+[tasks.'build:dev']
+depends = ['print_version']
+run = '''
+pnpm --color vite build
+pnpm --color vite build -c vite.config-sw.js
+node --no-warnings build.js --dev
+pnpm exec cap copy
+'''
+
+[env]
+# In Android Studio -> Gradle Settings specify this Java version.
+JAVA_HOME = "{{exec(command='mise which java | sed \"s|/bin/java$||\"')}}"
+
+VITE_PORT = 5005
+VITE_HOST = 1
+
+APP_NAME =  "{{exec(command='jq -r .name package.json')}}"
+BUNDLE_ID = "{{exec(command='jq -r .config.app_id package.json')}}"

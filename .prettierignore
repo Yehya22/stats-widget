@@ -1,0 +1,16 @@
+/*
+!/src
+!/e2e
+!/messages
+!/deploy_update.js
+!/capacitor.config.ts
+!/eslint.config.js
+!/svelte.config.js
+!/tailwind.config.js
+!/vite.config.js
+!/prettier.config.js
+!/playwright.config.js
+!/scripts/
+/scripts/*
+!/scripts/scrape-landing.js
+copy-protect.js

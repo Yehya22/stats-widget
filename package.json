@@ -1,0 +1,56 @@
+{
+  "name": "stats-widget",
+  "version": "1.0.0",
+  "config": {
+    "name": "stats widget",
+    "domain": "stats.widget.app"
+  },
+  "devDependencies": {
+    "@capacitor-community/sqlite": "^6.0.2",
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/app": "^6.0.2",
+    "@capacitor/cli": "^6.2.0",
+    "@capacitor/core": "^6.2.0",
+    "@capacitor/ios": "^6.2.0",
+    "@csstools/postcss-is-pseudo-class": "^5.0.1",
+    "@ionic/pwa-elements": "^3.3.0",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@tsconfig/svelte": "^5.0.4",
+    "autoprefixer": "^10.4.20",
+    "cssnano": "^7.0.6",
+    "eslint": "^9.18.0",
+    "eslint-plugin-import-x": "^4.6.1",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-svelte": "^3.0.0-next.15",
+    "globals": "^15.14.0",
+    "jeep-sqlite": "^2.8.0",
+    "lefthook": "^1.10.8",
+    "lucide-svelte": "^0.473.0",
+    "postcss": "^8.5.1",
+    "postcss-nesting": "^13.0.1",
+    "prettier": "^3.4.2",
+    "prettier-plugin-svelte": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.10",
+    "sql-template-tag": "^5.2.1",
+    "svelte": "^5.19.0",
+    "tailwindcss": "^3.4.17",
+    "terser": "^5.37.0",
+    "typescript": "^5.7.3",
+    "unplugin-auto-import": "^19.0.0",
+    "vite": "^6.0.7"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-darwin-arm64": "^4.30.1"
+  },
+  "scripts": {
+    "bump": "[ -n \"$(git status --porcelain package.json)\" ] && echo \"commit package.json first\" && exit 1 || VER=$(pnpm version patch --no-git-tag-version) && git add package.json && git commit --amend --no-edit && git tag -f $VER && echo $VER",
+    "dev": "vite dev --port $VITE_PORT",
+    "build:native": "vite build --outDir dist-native"
+  },
+  "browserslist": [
+    "last 40 chrome version",
+    "last 35 firefox version",
+    "last 15 safari version"
+  ],
+  "type": "module"
+}

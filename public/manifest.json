@@ -1,0 +1,14 @@
+{
+  "name": "stats widget",
+  "description": "stats widget",
+  "lang": "ar",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "icons": [{
+      "src": "app.png",
+      "sizes": "512x512",
+      "type": "image/png"
+  }]
+}
